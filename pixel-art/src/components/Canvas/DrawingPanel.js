@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import "../styles/drawingPanel.scss";
-import Row from "./Row";
+import "./drawingPanel.scss";
+import Row from "./Row/Row";
 import { exportComponentAsPNG } from "react-component-export-image";
-import {getPattern} from "../Modules/PatternMaker"
-import {colors,colorNames} from "../Modules/Colors"
+import {getPattern} from "../../Modules/PatternMaker"
+import {colors,colorNames} from "../../Modules/Colors"
 
 export default function DrawingPanel({ width, height, selectedColor, setPattern, importedPattern, pattern }) {
 

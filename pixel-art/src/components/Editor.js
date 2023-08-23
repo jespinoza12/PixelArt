@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect} from "react";
 import "../styles/editor.scss";
 import { CirclePicker } from "react-color";
-import DrawingPanel from "./DrawingPanel";
+import DrawingPanel from "./Canvas/DrawingPanel";
 import {colors} from "../Modules/Colors"
 import Pattern from "./Pattern";
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { colors } from "../Modules/Colors";
-import "../styles/pixel.scss";
+import { colors } from "../../../../Modules/Colors";
+import "./pixel.scss";
 
 export default function Pixel({ selectedColor,updatePattern,importedColorIndex }) {
 
