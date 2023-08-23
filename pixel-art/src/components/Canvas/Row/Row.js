@@ -1,6 +1,6 @@
 import React from "react";
-import "../styles/row.scss";
-import Pixel from "./Pixel";
+import "./row.scss";
+import Pixel from "./Pixel/Pixel";
 import { useEffect } from "react";
 
 export default function Row({ width, selectedColor,showGrid,updatePattern, importedPattern }) {
