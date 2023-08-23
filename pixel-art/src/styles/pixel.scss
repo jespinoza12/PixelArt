@@ -1,0 +1,10 @@
+.pixel {
+  width: 1.5rem;
+  min-width: .5rem;
+  aspect-ratio: 1/1 !important;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 50%;
+  }
+}

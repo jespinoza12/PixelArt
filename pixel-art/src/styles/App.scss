@@ -1,0 +1,55 @@
+@import "properties.scss";
+@import url("https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap");
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: $black;
+  color: $white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Play", sans-serif;
+  text-align: center;
+  min-width: fit-content;
+}
+
+.inline {
+  display: inline;
+}
+
+.button-panel {
+  display: flex;
+  gap: 10px;
+}
+
+#main {
+  width: 80%;
+  margin: auto;
+}
+
+$tab-margin: 30px;
+
+.pattern-holder {
+  border: 1px solid $red;
+  border-radius: 0.25rem;
+  padding: 1rem 4rem 2rem 4rem;
+  margin-top: 20px;
+
+  .pattern {
+    text-align: left;
+    padding: 10px;
+    width: 100%;
+    columns: 2;
+    column-gap: 60px;
+    width: 100%;
+  
+    .line {
+      break-inside: avoid-column;
+    }
+  }  
+}
