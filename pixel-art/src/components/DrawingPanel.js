@@ -14,6 +14,10 @@ export default function DrawingPanel(props) {
   const panelRef = useRef();
 
   useEffect(() => {
+    console.log("Panel",selectedColor)
+  },[selectedColor])
+
+  useEffect(() => {
     let newRows = [];
 
     for (let i = 0; i < height; i++) {
@@ -52,7 +56,6 @@ export default function DrawingPanel(props) {
           patternColors[r] = [...patternColors[r],colors.indexOf(rgbToHex(pixel.style["background-color"]).toUpperCase()).toString(colors.length).toUpperCase()]
         }
       }
-      console.log("ref",patternColors)
     }
     return patternColors
   }
