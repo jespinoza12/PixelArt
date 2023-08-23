@@ -5,8 +5,7 @@ import { exportComponentAsPNG } from "react-component-export-image";
 import {getPattern} from "../Modules/PatternMaker"
 import {colors,colorNames} from "../Modules/Colors"
 
-export default function DrawingPanel(props) {
-  const { width, height, selectedColor, setPattern, importedPattern, pattern } = props;
+export default function DrawingPanel({ width, height, selectedColor, setPattern, importedPattern, pattern }) {
 
   const [showGrid,setShowGrid] = useState(false)
   const [pixelData,setPixelData] = useState({pallet: "rainbow",size: {width,height},pixels: []})
@@ -24,7 +23,8 @@ export default function DrawingPanel(props) {
       newRows.push(<Row updatePattern={updatePattern} showGrid={showGrid} key={i} width={width} selectedColor={selectedColor} importedPattern={importedPattern?.[i]}/>);
     }
     setRows(newRows)
-  },[])
+    console.log(selectedColor)
+  },[selectedColor])
 
   useEffect(() => {
     if (rows.length) {

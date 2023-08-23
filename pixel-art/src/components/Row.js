@@ -3,8 +3,7 @@ import "../styles/row.scss";
 import Pixel from "./Pixel";
 import { useEffect } from "react";
 
-export default function Row(props) {
-  const { width, selectedColor,showGrid,updatePattern, importedPattern } = props;
+export default function Row({ width, selectedColor,showGrid,updatePattern, importedPattern }) {
 
   let pixels = [];
 

@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { colors } from "../Modules/Colors";
 import "../styles/pixel.scss";
 
-export default function Pixel(props) {
-  const { selectedColor,updatePattern,importedColorIndex } = props;
+export default function Pixel({ selectedColor,updatePattern,importedColorIndex }) {
 
   const [pixelColor, setPixelColor] = useState(importedColorIndex ? colors[parseInt(importedColorIndex,36)] : "#FFF");
 
