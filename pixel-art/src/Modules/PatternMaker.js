@@ -56,9 +56,9 @@ export function getPattern(characters,width,height) {
     return output;
 }
 
-const replaceRepeats = (s) => {
+const replaceRepeats = (s,stitchType) => {
     if (s.length == 1) {
-        return "1 block of " + s;
+        return `1 ${stitchType} of ${s}` + s;
     }
     let output = "";
     let blocksUsed = 0;
@@ -70,11 +70,11 @@ const replaceRepeats = (s) => {
                 break;
             }
         }
-        output += totalCount + ` block${totalCount == 1 ? "" : "s"} of ` + s.charAt(i) + ", ";
+        output += totalCount + ` ${stitchType}${totalCount == 1 ? "" : "s"} of ` + s.charAt(i) + ", ";
         i+= totalCount-1;
         blocksUsed += totalCount;
     }
     if (blocksUsed < s.length)
-        output += "1 block of " + s.charAt(s.length-1);
+        output += `1 ${stitchType} of ${s.charAt(s.length-1)}`;
     return output;
 }
