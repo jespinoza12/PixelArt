@@ -17,9 +17,9 @@ function Nav({user}) {
 
     return (
         <nav>
-            <button>Login</button>
             <button>Export Canvas</button>
             <button>Export Pattern</button>
+            <button>Login</button>
         </nav>
     )
 }
