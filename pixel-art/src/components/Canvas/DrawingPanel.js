@@ -11,8 +11,22 @@ export default function DrawingPanel({ width, height, selectedColor, setPattern,
   const [pixelData,setPixelData] = useState({pallet: "rainbow",size: {width,height},pixels: []})
   const [rows,setRows] = useState([])
 
-  const [canvas,setCanvas] = useState(importedPattern || new Array(width).fill(new Array(height).fill("u")))
+const createArray = (width,height) => {
+  let output = []
+  for (let r = 0; r < height; r++) {
+    output = [...output,[]]
+    for (let c = 0; c < width; c++) {
+      output[r] = [...output[r],"U"]
+    }
+  }
+  return output
+}
+
+
+  const [canvas,setCanvas] = useState(importedPattern ? importedPattern : createArray(width,height))
   const panelRef = useRef()
+
+  
 
   useEffect(() => {
     let newRows = [];
@@ -21,7 +35,7 @@ export default function DrawingPanel({ width, height, selectedColor, setPattern,
       newRows.push(<Row row={i} updatePattern={updatePattern} showGrid={showGrid} key={i} width={width} selectedColor={selectedColor} importedPattern={canvas[i]}/>);
     }
     setRows(newRows)
-  },[selectedColor])
+  },[selectedColor,canvas])
 
   useEffect(() => {
     if (canvas[0]?.length)
@@ -49,8 +63,9 @@ export default function DrawingPanel({ width, height, selectedColor, setPattern,
   }
 
   const updatePattern = (r,c,index) => {
-    if (canvas[0].length)
-      setCanvas(canvas.splice(r,1,canvas[r].splice(c,1,index)))
+    let newCanvas = canvas.map(row => row.map(pixel => (pixel)))
+    newCanvas[r][c] = index
+    setCanvas(newCanvas)
   }
 
   const getPatternURL = () => {
