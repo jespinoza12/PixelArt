@@ -31,7 +31,7 @@ function PatternSwitcher({canvas,setPixelData,width,height,pixelData}) {
         pattern = getScPattern(canvas,type)
     for (let i = 0; i < colors.length; i++) {
         pattern = pattern.map((line) => {
-        return line.replaceAll(`${i.toString(colors.length).toUpperCase()},`,`{${colorNames[i]}},`).replace(`${i.toString(colors.length).toUpperCase()} inc`,`{${colorNames[i]}} inc`).replace(`${i.toString(colors.length).toUpperCase()} dec`,`{${colorNames[i]}} dec`).replace(",  "," ")
+        return line.replaceAll(`{${i.toString(colors.length).toUpperCase()}}`,`{${colorNames[i]}},`).replace(",  "," ")
         })
     }
     setPattern(pattern)
@@ -53,8 +53,8 @@ function PatternSwitcher({canvas,setPixelData,width,height,pixelData}) {
                 <li><button onClick={() => setPatternType("c2c")}>c2c</button></li>
                 <li><button onClick={() => setPatternType(2)}>Single crochet ↑</button></li>
                 <li><button onClick={() => setPatternType(0)}>Single crochet ↓</button></li>
-                <li><button onClick={() => setPatternType(3)}>Single crochet →</button></li>
-                <li><button onClick={() => setPatternType(1)}>Single crochet ←</button></li>
+                <li><button onClick={() => setPatternType(1)}>Single crochet →</button></li>
+                <li><button onClick={() => setPatternType(3)}>Single crochet ←</button></li>
             </ul>
             {pattern ? <Pattern pattern={pattern} /> : <></>}
       <a className="button inline-block" target="blank" download={`test.txt`} href={getPatternURL()}>Export Pattern</a>

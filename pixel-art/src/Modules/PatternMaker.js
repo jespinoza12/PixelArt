@@ -53,6 +53,7 @@ export function getC2CPattern(characters,width,height) {
         output[row] = output[row].substring(beginIndex-4, beginIndex) + replaceRepeats(output[row].substring(beginIndex, length-4)) + output[row].substring(length-4);
         output[row] += " (" + (length-4-beginIndex) + ")\n";
     }
+    console.log(output)
     return output;
 }
 
@@ -72,21 +73,20 @@ const rotateMatrix = (arr,amount) => {
 }
 
 const formatScPattern = (canvas) => {
-    let output = [`1: chain ${canvas[0].length+1}`]
+    let output = [`chain ${canvas[0].length+1}`]
     for (let r = 0; r < canvas.length; r++) {
         let rowData;
         if (r % 2 == 0)
             rowData = replaceRepeats(canvas[r].join(""),"stitch","stitches")
         else 
             rowData = replaceRepeats(canvas[r].reverse().join(""),"stitch","stitches")
-        let newRow = `${r+1}: ${rowData} ch 1, turn`
+        let newRow = `${rowData}`
         output = [...output,newRow]
     }
     return output;
 }
 
 const replaceRepeats = (s,stitchType,stitchTypePlural) => {
-    console.log(s)
     if (!stitchType) {
         stitchType = "block"
     }
@@ -94,7 +94,7 @@ const replaceRepeats = (s,stitchType,stitchTypePlural) => {
         stitchTypePlural = "blocks"
     }
     if (s.length == 1) {
-        return `1 ${stitchType} of ${s}`;
+        return `1 ${stitchType} of {${s}}`;
     }
     let output = "";
     let blocksUsed = 0;
@@ -106,12 +106,12 @@ const replaceRepeats = (s,stitchType,stitchTypePlural) => {
                 break;
             }
         }
-        output += totalCount + ` ${totalCount == 1 ? stitchType : stitchTypePlural} of ` + s.charAt(i) + ", ";
+        output += totalCount + ` ${totalCount == 1 ? stitchType : stitchTypePlural} of {${s.charAt(i)}} `;
         i+= totalCount-1;
         blocksUsed += totalCount;
     }
     if (blocksUsed < s.length)
-        output += `1 ${stitchType} of ${s.charAt(s.length-1)}`;
-    console.log(output)
+        output += `1 ${stitchType} of {${s.charAt(s.length-1)}}`;
+    console.log(s,output)
     return output;
 }
