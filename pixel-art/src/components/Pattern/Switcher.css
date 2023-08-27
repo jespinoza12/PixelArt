@@ -1,0 +1,8 @@
+#pattern-nav {
+    display: flex;
+    flex-direction: row;
+}
+
+#pattern-nav > li {
+    list-style: none;
+}

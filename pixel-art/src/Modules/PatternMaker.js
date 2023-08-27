@@ -1,4 +1,4 @@
-export function getPattern(characters,width,height) {
+export function getC2CPattern(characters,width,height) {
     width = parseInt(width)
     height = parseInt(height)
     let rows = width+height-1;
@@ -22,10 +22,10 @@ export function getPattern(characters,width,height) {
                 workingC--;
                 workingR++;
             }while (workingC >= 0 && workingR < height);
-            if (workingR == height) {
-                output[row] += " dec";
-            } else {
+            if (row < height) {
                 output[row] += " inc";
+            } else {
+                output[row] += " dec";
             }
         } else {
             if (row < height) {
@@ -42,10 +42,10 @@ export function getPattern(characters,width,height) {
                 workingR--;
                 workingC++;
             }while (workingR >= 0 && workingC < width);
-            if (workingC == width) {
-                output[row] += " dec";
-            } else {
+            if (row < width) {
                 output[row] += " inc";
+            } else {
+                output[row] += " dec";
             }
         }
         let length = output[row].length;
@@ -56,7 +56,37 @@ export function getPattern(characters,width,height) {
     return output;
 }
 
+export function getScPattern(canvas,direction) {
+    if (direction)
+        canvas = rotateMatrix(canvas,direction)
+    return formatScPattern(canvas)
+}
+
+const rotateMatrix = (arr,amount) => {
+    let newArr = arr.map(row => ([...row]))
+    for (let i = 0; i < amount; i++) {
+        newArr = newArr[0].map((val, index) => newArr.map(row => row[index]).reverse())
+    }
+    console.log("rotated",newArr)
+    return newArr
+}
+
+const formatScPattern = (canvas) => {
+    let output = [`1: chain ${canvas[0].length+1}`]
+    for (let r = 0; r < canvas.length; r++) {
+        let rowData;
+        if (r % 2 == 0)
+            rowData = replaceRepeats(canvas[r].join(""),"stitch","stitches")
+        else 
+            rowData = replaceRepeats(canvas[r].reverse().join(""),"stitch","stitches")
+        let newRow = `${r+1}: ${rowData} ch 1, turn`
+        output = [...output,newRow]
+    }
+    return output;
+}
+
 const replaceRepeats = (s,stitchType,stitchTypePlural) => {
+    console.log(s)
     if (!stitchType) {
         stitchType = "block"
     }
@@ -82,5 +112,6 @@ const replaceRepeats = (s,stitchType,stitchTypePlural) => {
     }
     if (blocksUsed < s.length)
         output += `1 ${stitchType} of ${s.charAt(s.length-1)}`;
+    console.log(output)
     return output;
 }
