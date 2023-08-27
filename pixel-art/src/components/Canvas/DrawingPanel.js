@@ -10,60 +10,50 @@ export default function DrawingPanel({ width, height, selectedColor, setPattern,
   const [showGrid,setShowGrid] = useState(false)
   const [pixelData,setPixelData] = useState({pallet: "rainbow",size: {width,height},pixels: []})
   const [rows,setRows] = useState([])
-  const panelRef = useRef();
 
-  useEffect(() => {
-    console.log("Panel",selectedColor)
-  },[selectedColor])
+const createArray = (width,height) => {
+  let output = []
+  for (let r = 0; r < height; r++) {
+    output = [...output,[]]
+    for (let c = 0; c < width; c++) {
+      output[r] = [...output[r],"U"]
+    }
+  }
+  return output
+}
+
+
+  const [canvas,setCanvas] = useState(importedPattern ? importedPattern : createArray(width,height))
+  const panelRef = useRef()
+
+  
 
   useEffect(() => {
     let newRows = [];
 
     for (let i = 0; i < height; i++) {
-      newRows.push(<Row updatePattern={updatePattern} showGrid={showGrid} key={i} width={width} selectedColor={selectedColor} importedPattern={importedPattern?.[i]}/>);
+      newRows.push(<Row row={i} updatePattern={updatePattern} showGrid={showGrid} key={i} width={width} selectedColor={selectedColor} importedPattern={canvas[i]}/>);
     }
     setRows(newRows)
-    console.log(selectedColor)
-  },[selectedColor])
+  },[selectedColor,canvas])
 
   useEffect(() => {
-    if (rows.length) {
-      updatePattern()
-    }
-  },[rows])
+    if (canvas[0]?.length)
+      createPattern()
+  },[canvas])
 
-  const updatePattern = () => {
-    createPattern(panelRef)
+  const getPixelString = () => {
+    let output = ""
+    for (let r = 0; r < canvas.length; r++) {
+      output += canvas[r].join("")
+    }
+    return output
   }
 
-  const getPatternColors = (ref) => {
-    
-    let patternColors = [];
-    if (!ref?.current) {
-      for (let r = 0; r < height; r++) {
-        patternColors = [...patternColors,[]]
-        for (let c = 0; c < width; c++) {
-          patternColors[r] = [...patternColors[r],"U"]
-        }
-      }
-      console.log("No ref",patternColors)
-    } else {
-      for (let r = 0; r < ref.current.children.length; r++) {
-        const row = ref.current.children[r]
-        patternColors = [...patternColors,[]]
-        for (let c = 0; c < row.children.length; c++) {
-          const pixel = row.children[c]
-          patternColors[r] = [...patternColors[r],colors.indexOf(rgbToHex(pixel.style["background-color"]).toUpperCase()).toString(colors.length).toUpperCase()]
-        }
-      }
-    }
-    return patternColors
-  }
-  
-  const createPattern = (ref) => {
-    let patternColors = getPatternColors(ref)
-    setPixelData({...pixelData,pixels:patternColors.toString().replaceAll(",","")})
-    let pattern = getPattern(patternColors,width,height)
+  const createPattern = () => {
+    setPixelData({...pixelData,pixels:getPixelString()})
+    console.log(canvas)
+    let pattern = getPattern(canvas,width,height)
     for (let i = 0; i < colors.length; i++) {
       pattern = pattern.map((line) => {
         return line.replaceAll(`${i.toString(colors.length).toUpperCase()},`,`{${colorNames[i]}},`).replace(`${i.toString(colors.length).toUpperCase()} inc`,`{${colorNames[i]}} inc`).replace(`${i.toString(colors.length).toUpperCase()} dec`,`{${colorNames[i]}} dec`).replace(",  "," ")
@@ -71,17 +61,11 @@ export default function DrawingPanel({ width, height, selectedColor, setPattern,
     }
     setPattern(pattern)
   }
-  function componentToHex(c) {
-    var hex = parseInt(c).toString(16);
-    return hex.length == 1 ? "0" + hex : hex;
-  }
-  function rgbToHex(color) {
-    let firstComma = color.indexOf(",")
-    let r = color.substring(4,firstComma)
-    const secondComma = color.indexOf(",",firstComma+2)
-    let g = color.substring(firstComma+2,secondComma)
-    let b = color.substring(secondComma+2,color.indexOf(")"))
-    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+
+  const updatePattern = (r,c,index) => {
+    let newCanvas = canvas.map(row => row.map(pixel => (pixel)))
+    newCanvas[r][c] = index
+    setCanvas(newCanvas)
   }
 
   const getPatternURL = () => {
