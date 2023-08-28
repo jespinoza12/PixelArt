@@ -39,26 +39,24 @@ function PatternSwitcher({canvas,setPixelData,width,height,pixelData}) {
 
     
 
-  const getPatternURL = () => {
-    const blob = new Blob([`${pattern.length} Rows\n`,...pattern])
-    return URL.createObjectURL(blob)
-  }
-  
+    const getPatternURL = () => {
+        const blob = new Blob([`${pattern.length} Rows\n`,...pattern])
+        return URL.createObjectURL(blob)
+    }
     const [pattern,setPattern] = useState([])
 
 
     return (
         <div className='pattern-holder'>
             <ul id="pattern-nav">
-                <li><button onClick={() => setPatternType("c2c")}>c2c</button></li>
-                <li><button onClick={() => setPatternType(2)}>Single crochet ↑</button></li>
-                <li><button onClick={() => setPatternType(0)}>Single crochet ↓</button></li>
-                <li><button onClick={() => setPatternType(1)}>Single crochet →</button></li>
-                <li><button onClick={() => setPatternType(3)}>Single crochet ←</button></li>
+                <li><button className='switch-nav-btn' onClick={() => setPatternType("c2c")}>c2c</button></li>
+                <li><button className='switch-nav-btn' onClick={() => setPatternType(2)}>Single crochet ↑</button></li>
+                <li><button className='switch-nav-btn' onClick={() => setPatternType(0)}>Single crochet ↓</button></li>
+                <li><button className='switch-nav-btn' onClick={() => setPatternType(1)}>Single crochet →</button></li>
+                <li><button className='switch-nav-btn' onClick={() => setPatternType(3)}>Single crochet ←</button></li>
             </ul>
             {pattern ? <Pattern pattern={pattern} /> : <></>}
-      <a className="button inline-block" target="blank" download={`test.txt`} href={getPatternURL()}>Export Pattern</a>
-            
+            <a className="button inline-block" target="blank" download={`test.txt`} href={getPatternURL()}>Export Pattern</a>
         </div>
     )
 }
