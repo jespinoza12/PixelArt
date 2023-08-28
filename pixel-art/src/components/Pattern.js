@@ -18,6 +18,8 @@ function Pattern({pattern}) {
         <div className='pattern-holder'>
             <h2>{pattern.length} Rows</h2>
             <ol className='pattern'>{pattern.map(line => {
+                if (!line.length)
+                    return
                 //all of the symbol texts in an array (empty if there isn't one)
                 const colorWords = line.match(textRegex) || []
                 //all of the text not including the symbols
