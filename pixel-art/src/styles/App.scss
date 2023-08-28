@@ -2,14 +2,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap");
 
 body,
-html {
+html,
+#root {
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 body {
-  background: $black;
-  color: $white;
+  background: $background;
+  color: $text;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,6 +29,25 @@ body {
   gap: 10px;
 }
 
+.button, button {
+  font-size: 1.25rem;
+  background-color: $primary-accent;
+  color: $text;
+  padding: 1rem 3rem;
+  border-radius: 0.25rem;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease-in-out;
+  margin-bottom: 2rem;
+  text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+    background-color: transparent;
+    border-color: $primary-accent;
+  }
+}
+
 #main {
   width: 80%;
   margin: auto;
@@ -35,7 +56,7 @@ body {
 $tab-margin: 30px;
 
 .pattern-holder {
-  border: 1px solid $red;
+  border: 1px solid $primary-accent;
   border-radius: 0.25rem;
   padding: 1rem 4rem 2rem 4rem;
   margin-top: 20px;

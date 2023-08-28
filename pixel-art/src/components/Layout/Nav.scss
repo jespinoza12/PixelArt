@@ -1,0 +1,21 @@
+@import "../../styles/properties";
+
+nav {
+    background-color: $secondary-accent;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 100%;
+    padding: 15px 0px;
+}
+
+nav > button {
+    background-color: $primary-accent;
+    outline: none;
+    border: none;
+    color: $text;
+    margin: 0px;
+    font-size: 15px;
+    border-radius: 10px;
+    margin-right: 15px;
+}

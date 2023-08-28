@@ -5,6 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import PatternReader from "./PatternReader";
+import Nav from "./Layout/Nav"
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
 
   return (
     <div className="App">
+      <Nav></Nav>
       <RouterProvider router={router} />
     </div>
   );

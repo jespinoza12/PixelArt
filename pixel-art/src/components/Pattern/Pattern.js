@@ -1,5 +1,5 @@
 import React from 'react'
-import {colors,colorNames} from "../Modules/Colors"
+import {colors,colorNames} from "../../Modules/Colors"
 
 function Pattern({pattern}) {
 
@@ -11,11 +11,11 @@ function Pattern({pattern}) {
     //style={{ backgroundColor: pixelColor }}
     const getColorStyle = (colorName) => {
 		const index = colorNames.indexOf(colorName)
-        return <p className='inline' style={{ color: colors[index] }}> {colorName} </p>
+        return <p className='inline' style={{ color: colors[index] }}> {colorName}</p>
     }
 
     return (
-        <div className='pattern-holder'>
+        <div>
             <h2>{pattern.length} Rows</h2>
             <ol className='pattern'>{pattern.map(line => {
                 if (!line.length)

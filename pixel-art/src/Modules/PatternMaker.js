@@ -1,4 +1,4 @@
-export function getPattern(characters,width,height) {
+export function getC2CPattern(characters,width,height) {
     width = parseInt(width)
     height = parseInt(height)
     let rows = width+height-1;
@@ -22,10 +22,10 @@ export function getPattern(characters,width,height) {
                 workingC--;
                 workingR++;
             }while (workingC >= 0 && workingR < height);
-            if (workingR == height) {
-                output[row] += " dec";
-            } else {
+            if (row < height) {
                 output[row] += " inc";
+            } else {
+                output[row] += " dec";
             }
         } else {
             if (row < height) {
@@ -42,10 +42,10 @@ export function getPattern(characters,width,height) {
                 workingR--;
                 workingC++;
             }while (workingR >= 0 && workingC < width);
-            if (workingC == width) {
-                output[row] += " dec";
-            } else {
+            if (row < width) {
                 output[row] += " inc";
+            } else {
+                output[row] += " dec";
             }
         }
         let length = output[row].length;
@@ -53,12 +53,48 @@ export function getPattern(characters,width,height) {
         output[row] = output[row].substring(beginIndex-4, beginIndex) + replaceRepeats(output[row].substring(beginIndex, length-4)) + output[row].substring(length-4);
         output[row] += " (" + (length-4-beginIndex) + ")\n";
     }
+    console.log(output)
     return output;
 }
 
-const replaceRepeats = (s) => {
+export function getScPattern(canvas,direction) {
+    if (direction)
+        canvas = rotateMatrix(canvas,direction)
+    return formatScPattern(canvas)
+}
+
+const rotateMatrix = (arr,amount) => {
+    let newArr = arr.map(row => ([...row]))
+    for (let i = 0; i < amount; i++) {
+        newArr = newArr[0].map((val, index) => newArr.map(row => row[index]).reverse())
+    }
+    console.log("rotated",newArr)
+    return newArr
+}
+
+const formatScPattern = (canvas) => {
+    let output = [`chain ${canvas[0].length+1}`]
+    for (let r = 0; r < canvas.length; r++) {
+        let rowData;
+        if (r % 2 == 0)
+            rowData = replaceRepeats(canvas[r].join(""),"stitch","stitches")
+        else 
+            rowData = replaceRepeats(canvas[r].reverse().join(""),"stitch","stitches")
+        let newRow = `${rowData}`
+        output = [...output,newRow]
+    }
+    return output;
+}
+
+const replaceRepeats = (s,stitchType,stitchTypePlural) => {
+    if (!stitchType) {
+        stitchType = "block"
+    }
+    if (!stitchTypePlural) {
+        stitchTypePlural = "blocks"
+    }
     if (s.length == 1) {
-        return "1 block of " + s;
+        return `1 ${stitchType} of {${s}}`;
     }
     let output = "";
     let blocksUsed = 0;
@@ -70,11 +106,12 @@ const replaceRepeats = (s) => {
                 break;
             }
         }
-        output += totalCount + ` block${totalCount == 1 ? "" : "s"} of ` + s.charAt(i) + ", ";
+        output += totalCount + ` ${totalCount == 1 ? stitchType : stitchTypePlural} of {${s.charAt(i)}} `;
         i+= totalCount-1;
         blocksUsed += totalCount;
     }
     if (blocksUsed < s.length)
-        output += "1 block of " + s.charAt(s.length-1);
+        output += `1 ${stitchType} of {${s.charAt(s.length-1)}}`;
+    console.log(s,output)
     return output;
 }
