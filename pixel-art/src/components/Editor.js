@@ -3,9 +3,21 @@ import "../styles/editor.scss";
 import { CirclePicker } from "react-color";
 import DrawingPanel from "./Canvas/DrawingPanel";
 import {colors} from "../Modules/Colors"
-import Pattern from "./Pattern";
+import PatternSwitcher from "./Pattern/PatternSwitcher";
 
 export default function Editor() {
+
+  const createArray = (width,height) => {
+    let output = []
+    for (let r = 0; r < height; r++) {
+      output = [...output,[]]
+      for (let c = 0; c < width; c++) {
+        output[r] = [...output[r],"U"]
+      }
+    }
+    return output
+  }
+
   const [panelWidth, setPanelWidth] = useState(16);
   const [panelHeight, setPanelHeight] = useState(16);
   const [hideOptions, setHideOptions] = useState(false);
@@ -15,8 +27,8 @@ export default function Editor() {
 
   const [importedPattern,setImportedPattern] = useState(null)
   const [file,setFile] = useState()
-  
-  const [pattern,setPattern] = useState([])
+  const [canvas,setCanvas] = useState(importedPattern ? importedPattern : createArray(panelWidth,panelHeight))
+  const [pixelData,setPixelData] = useState({pallet: "rainbow",size: {panelWidth,panelHeight},pixels: []})
 
   const fileInput = useRef();
   const selectFile = () => {
@@ -43,7 +55,15 @@ export default function Editor() {
   function initializeDrawingPanel() {
     setHideOptions(!hideOptions);
     setHideDrawingPanel(!hideDrawingPanel);
-    setPattern([])
+    
+
+    if (buttonText == "startDrawing") {
+      setCanvas([[]])
+      setButtonText("Reset")
+    } else {
+      setButtonText("Reset")
+      setCanvas(createArray(panelWidth,panelHeight))
+    }
 
     buttonText === "start drawing"
       ? setButtonText("reset")
@@ -68,7 +88,7 @@ export default function Editor() {
   }
 
   return (
-    <div id="main" className={pattern ? "column-2" : "column-1"}><div id="editor">
+    <div id="main"><div id="editor">
     <h1>Pixel Editor</h1>
     {hideDrawingPanel && <h2>Enter Panel Dimensions</h2>}
     {hideDrawingPanel && (
@@ -114,18 +134,20 @@ export default function Editor() {
     )}
 
     {hideOptions && (
-      <DrawingPanel
-        width={panelWidth}
-        height={panelHeight}
-        selectedColor={selectedColor}
-        setPattern={setPattern}
-        importedPattern={importedPattern}
-        pattern={pattern}
-      />
+        <div>
+          <DrawingPanel
+          width={panelWidth}
+          height={panelHeight}
+          selectedColor={selectedColor}
+          importedPattern={importedPattern}
+          canvas={canvas}
+          setCanvas={setCanvas}
+          pixelData={pixelData}
+        />
+        <PatternSwitcher canvas={canvas} setPixelData={setPixelData} width={panelWidth} height={panelHeight} pixelData={pixelData}/>
+      </div>
     )}
   </div>
-  
-  {pattern ? <Pattern pattern={pattern} /> : <></>}
   </div>
   );
 }

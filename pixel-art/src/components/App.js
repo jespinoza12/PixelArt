@@ -4,6 +4,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import Nav from "./Layout/Nav"
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
 
   return (
     <div className="App">
+      <Nav></Nav>
       <RouterProvider router={router} />
     </div>
   );
