@@ -4,34 +4,22 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import PatternReader from "./PatternReader";
 import Nav from "./Layout/Nav"
 
 function App() {
 
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/canvas",
       element:<Editor />,
-    },
-    // {
-    //   path: "/pattern/c2c",
-    //   element:<Pattern />,
-    // },{
-    //   path: "/pattern/c2c-inverse",
-    //   element:<Pattern />,
-    // },{
-    //   path: "/pattern/sc-up",
-    //   element:<Pattern />,
-    // },{
-    //   path: "/pattern/sc-down",
-    //   element:<Pattern />,
-    // },{
-    //   path: "/pattern/sc-right",
-    //   element:<Pattern />,
-    // },{
-    //   path: "/pattern/sc-left",
-    //   element:<Pattern />,
-    // }
+    },{
+      path: "pattern",
+      element: <PatternReader />
+    },{
+      path: "/",
+      element: <p>Home</p>
+    }
   ]);
 
   return (

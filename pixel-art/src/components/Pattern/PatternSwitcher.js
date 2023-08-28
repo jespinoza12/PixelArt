@@ -31,7 +31,7 @@ function PatternSwitcher({canvas,setPixelData,width,height,pixelData}) {
         pattern = getScPattern(canvas,type)
     for (let i = 0; i < colors.length; i++) {
         pattern = pattern.map((line) => {
-        return line.replaceAll(`{${i.toString(colors.length).toUpperCase()}}`,`{${colorNames[i]}},`).replace(",  "," ")
+        return line.replaceAll(`{${i.toString(colors.length).toUpperCase()}}`,`{${colorNames[i]}}`).replace(",  "," ")
         })
     }
     setPattern(pattern)

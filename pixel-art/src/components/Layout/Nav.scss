@@ -9,13 +9,15 @@ nav {
     padding: 15px 0px;
 }
 
-nav > button {
+nav > a {
     background-color: $primary-accent;
     outline: none;
     border: none;
+    text-decoration: none;
     color: $text;
     margin: 0px;
     font-size: 15px;
     border-radius: 10px;
     margin-right: 15px;
+    padding: 10px;
 }
