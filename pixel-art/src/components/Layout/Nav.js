@@ -17,9 +17,9 @@ function Nav({user}) {
 
     return (
         <nav>
-            <button>Export Canvas</button>
-            <button>Export Pattern</button>
-            <button>Login</button>
+            <a href='/canvas'>Draw</a>
+            <a href='/pattern'>Pattern</a>
+            <a href='/'>Login</a>
         </nav>
     )
 }

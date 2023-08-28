@@ -1,0 +1,11 @@
+@import "../styles/properties.scss";
+
+.highlighted-line {
+    color: $primary-accent;
+}
+
+.pattern-btn {
+    font-size: 12px;
+    margin: 5px;
+    padding: 5px;
+}

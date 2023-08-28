@@ -106,7 +106,7 @@ const replaceRepeats = (s,stitchType,stitchTypePlural) => {
                 break;
             }
         }
-        output += totalCount + ` ${totalCount == 1 ? stitchType : stitchTypePlural} of {${s.charAt(i)}} `;
+        output += totalCount + ` ${totalCount == 1 ? stitchType : stitchTypePlural} of {${s.charAt(i)}}, `;
         i+= totalCount-1;
         blocksUsed += totalCount;
     }

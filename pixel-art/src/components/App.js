@@ -11,11 +11,14 @@ function App() {
 
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/canvas",
       element:<Editor />,
     },{
       path: "pattern",
       element: <PatternReader />
+    },{
+      path: "/",
+      element: <p>Home</p>
     }
   ]);
 
