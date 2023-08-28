@@ -1,7 +1,7 @@
 @import "properties.scss";
 
 #editor {
-  border: 1px solid $red;
+  border: 1px solid $primary-accent;
   border-radius: 0.25rem;
   padding: 1rem 4rem 2rem 4rem;
   margin-top: 2rem;
@@ -34,37 +34,18 @@
       width: 5rem;
       font-size: 2rem;
       text-align: center;
-      background-color: $black;
-      color: $white;
-      border: 1px solid $grey;
+      background-color: $background;
+      color: $text;
+      border: 1px solid $secondary-accent;
       border-radius: 0.25rem;
       margin: 0 1rem 0.5rem 1rem;
       padding-left: 1rem;
 
       &:focus {
         outline: none !important;
-        border-color: $red;
-        box-shadow: 0 0 0.5rem $grey;
+        border-color: $primary-accent;
+        box-shadow: 0 0 0.5rem $secondary-accent;
       }
-    }
-  }
-
-  .button {
-    font-size: 1.25rem;
-    background-color: $red;
-    color: $white;
-    padding: 1rem 3rem;
-    border-radius: 0.25rem;
-    text-transform: uppercase;
-    border: 1px solid transparent;
-    transition: background-color 0.2s ease-in-out;
-    margin-bottom: 2rem;
-    text-decoration: none;
-
-    &:hover {
-      cursor: pointer;
-      background-color: transparent;
-      border-color: $red;
     }
   }
 
