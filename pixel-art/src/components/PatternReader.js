@@ -3,7 +3,7 @@ import "./Reader.scss"
 
 function PatternReader() {
 
-    const [pattern,setPattern] = useState([["a","a"],["a","a","a","a"],["a","a","a","a"]])
+    const [pattern,setPattern] = useState([])
     const [currentLine,setCurrentLine] = useState(0)
     const [currentSection,setCurrentSection] = useState(0)
 
