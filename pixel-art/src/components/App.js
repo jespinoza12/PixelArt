@@ -41,7 +41,7 @@ function App() {
       element:<Editor user={user} />,
     },
     {
-      path: "/allCanvasses",
+      path: "/allCanvases",
       element:<Canvases getUser={user} />,
     },
     {
