@@ -105,6 +105,7 @@ function PatternReader() {
         <div className='container'>
             <p>Import pattern file</p>
             <input type="file" id="docpicker" accept=".txt" onChange={(evt) => handleFile(evt.target.files[0])} />
+            {pattern.length ? 
             <div className='pattern-holder'>
                 <button className='inline pattern-btn' onClick={decrementSection}>Back (Up)</button>
                 <button className='inline pattern-btn' onClick={incrementSection}>Next (Down)</button>
@@ -113,8 +114,8 @@ function PatternReader() {
                 <ol className='pattern'>
                     {pattern.map((line,lineIndex) => {
                         if (line?.[0].length) {
-                            return <li key={lineIndex} ref={lineIndex == currentLine ? scrollRef : null} className={lineIndex == currentLine ? "highlighted-line" : ""}>{line.map((section,i) => (
-                                lineIndex == currentLine && i == currentSection ? <strong key={i} className='inline'>{section},</strong> : <p key={i} className='inline'>{section},</p>
+                            return <li key={lineIndex} ref={lineIndex == currentLine ? scrollRef : null} className={`pattern-reader-line ${lineIndex == currentLine ? "highlighted-line" : ""}`}>{line.map((section,i) => (
+                                lineIndex == currentLine && i == currentSection ? <strong onClick={() => {setCurrentLine(lineIndex);setCurrentSection(i)}} key={i} className='inline'>{section},</strong> : <p onClick={() => {setCurrentLine(lineIndex);setCurrentSection(i)}} key={i} className='inline'>{section},</p>
                             ))}</li>
                         }
                     })}
@@ -124,6 +125,8 @@ function PatternReader() {
                 <button className='inline pattern-btn' onClick={decrementLine}>Previous Line (Left)</button>
                 <button className='inline pattern-btn' onClick={incrementLine}>Next Line (Right)</button>
             </div>
+            :
+            <></>}
         </div>
     )
 }
