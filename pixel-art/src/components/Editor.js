@@ -34,20 +34,24 @@ export default function Editor({user}) {
   
   const [name,setName] = useState("Untitled")
   
-  const [pixelData,setPixelData] = useState({pallet: "rainbow",size: {width:panelWidth,height:panelHeight},pixels: [],name,userId:user._id})
+  const [pixelData,setPixelData] = useState({pallet: "rainbow",size: {width:panelWidth,height:panelHeight},pixels: [],name,userId:user?._id})
 
   const getCanvas = async (id) => {
-    const results = await axios.get(`http://localhost:6969/c/${id}`)
-    console.log("results",results.data)
-    if (results.data?.pixels) {
-        console.log(results.data)
-        setCanvas(results.data.pixels)
-        setPanelWidth(results.data.size.width)
-        setPanelHeight(results.data.size.height)
-        setButtonText("Reset")
-        setHideDrawingPanel(false)
-        setHideOptions(true)
-        setName(results.data.name)
+    try {
+      const results = await axios.get(`http://localhost:6969/c/${id}`)
+      console.log("results",results.data)
+      if (results.data?.pixels) {
+          console.log(results.data)
+          setCanvas(results.data.pixels)
+          setPanelWidth(results.data.size.width)
+          setPanelHeight(results.data.size.height)
+          setButtonText("Reset")
+          setHideDrawingPanel(false)
+          setHideOptions(true)
+          setName(results.data.name)
+      }
+    } catch (err) {
+      console.log(err)
     }
 }
 

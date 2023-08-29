@@ -30,8 +30,12 @@ export default function DrawingPanel({ width, height, selectedColor, canvas, set
 
   const SaveCanvas = async () => {
     console.log("save",pixelData)
-    const result = await axios.post("http://localhost:6969/c/create",pixelData)
-    console.log(result.data)
+    try {
+      const result = await axios.post("http://localhost:6969/c/create",pixelData)
+      console.log(result.data)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (

@@ -35,7 +35,7 @@ function PatternReader({user}) {
             let patternText = results.data.pattern;
             patternText = patternText.replaceAll("\r","").replaceAll("{","").replaceAll("}","")
             console.log(patternText.split("\\n"))
-            setPattern(patternText.split("\\n").slice(1).map(line => (line.split(","))))
+            setPattern(patternText.split("\\n").map(line => (line.split(","))))
         }
     }
 
@@ -127,8 +127,12 @@ function PatternReader({user}) {
             format: "Custom",
             userID: user._id
         }
+        try {
         const response = await axios.post(url,body)
         console.log(response)
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     return (
