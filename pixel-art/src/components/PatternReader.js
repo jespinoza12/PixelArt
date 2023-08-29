@@ -81,7 +81,7 @@ function PatternReader() {
     }
 
     const incrementLine = () => {
-        if (currentLine < pattern.length-2){
+        if (currentLine < pattern.length-1){
             setCurrentLine(currentLine+1)
             setCurrentSection(0)
         }
