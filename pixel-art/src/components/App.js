@@ -41,8 +41,8 @@ function App() {
       element:<><Nav user={user} setUser={setUser}></Nav><Editor user={user} /></>
     },
     {
-      path: "/allCanvasses",
-      element:<><Nav user={user} setUser={setUser}></Nav><Canvases getUser={user} /></>
+      path: "/allCanvases",
+      element:<><Nav user={user} setUser={setUser}></Nav><Canvases user={user} /></>
     },
     {
       path: "/allPatterns",

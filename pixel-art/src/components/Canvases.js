@@ -7,11 +7,13 @@ function Canvases({user}) {
     const [canvases, setCanvases] = useState([])
 
     useEffect(() => {
+        console.log(user)
         getCanvases()
     }, [])
 
     const getCanvases = async () => {
-        const response = await axios.get(`http://localhost:6969/c/user/${sessionStorage.getItem("id")}`)
+        let url = `http://localhost:6969/c/user/${user._id}`
+        const response = await axios.get(url)
         if (response.data) {
             setCanvases(response.data)
         }

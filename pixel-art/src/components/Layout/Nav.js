@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom'
 
 function Nav({user,setUser}) {
 
-    const handleLogout = async () => {
+    const handleLogout = async (evt) => {
+        evt.preventDefault()
         setUser({})
         const result = await axios.get("http://localhost:6969/u/logout")
         console.log("Logout",result.data)
@@ -19,9 +20,9 @@ function Nav({user,setUser}) {
         return (
             <nav>
                 <Link to="../allPatterns">My Patterns</Link>
-                <a href='/allCanvases'>My Canvases</a>
-                <a href='/canvas'>Draw</a>
-                <a href='/pattern'>Pattern</a>
+                <Link to='../allCanvases'>My Canvases</Link>
+                <Link to='../canvas'>Draw</Link>
+                <Link to='../pattern'>Pattern</Link>
                 <a onClick={handleLogout} href='/'>Log out</a>
             </nav>
         )

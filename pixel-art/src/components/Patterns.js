@@ -12,7 +12,8 @@ function Patterns({user}) {
     }, [])
 
     const getPatterns = async () => {
-        const response = await axios.get(`http://localhost:6969/p/user/${sessionStorage.getItem("id")}`)
+        let url = `http://localhost:6969/p/user/${user._id}`
+        const response = await axios.get(url)
         console.log(response.data)
         setPatterns(response.data)
     }
