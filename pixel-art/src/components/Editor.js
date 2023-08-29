@@ -4,8 +4,12 @@ import { CirclePicker } from "react-color";
 import DrawingPanel from "./Canvas/DrawingPanel";
 import {colors} from "../Modules/Colors"
 import PatternSwitcher from "./Pattern/PatternSwitcher";
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
-export default function Editor() {
+export default function Editor({user}) {
+
+  const {id} = useParams()
 
   const createArray = (width,height) => {
     let output = []
@@ -30,7 +34,28 @@ export default function Editor() {
   
   const [name,setName] = useState("Untitled")
   
-  const [pixelData,setPixelData] = useState({pallet: "rainbow",size: {panelWidth,panelHeight},pixels: [],name})
+  const [pixelData,setPixelData] = useState({pallet: "rainbow",size: {width:panelWidth,height:panelHeight},pixels: [],name,userId:user._id})
+
+  const getCanvas = async (id) => {
+    const results = await axios.get(`http://localhost:6969/c/${id}`)
+    console.log("results",results.data)
+    if (results.data?.pixels) {
+        console.log(results.data)
+        setCanvas(results.data.pixels)
+        setPanelWidth(results.data.size.width)
+        setPanelHeight(results.data.size.height)
+        setButtonText("Reset")
+        setHideDrawingPanel(false)
+        setHideOptions(true)
+        setName(results.data.name)
+    }
+}
+
+useEffect(() => {
+    console.log(id)
+    if (id) 
+        getCanvas(id)
+},[id])
 
   const fileInput = useRef();
   const selectFile = () => {
@@ -55,9 +80,9 @@ export default function Editor() {
   },[file])
 
   useEffect(() => {
-    setPixelData({...pixelData,pixels:canvas})
-    console.log(pixelData)
-  },[canvas])
+    setPixelData({pallet: "rainbow",size: {width:panelWidth,height:panelHeight},pixels: canvas,name,userId:user._id})
+    console.log(canvas)
+  },[canvas,name,panelWidth,panelHeight])
 
   function initializeDrawingPanel() {
     setHideOptions(!hideOptions);

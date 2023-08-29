@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Canvases({user}) {
 
@@ -28,7 +28,7 @@ function Canvases({user}) {
                     <p>{canvas.pallet}</p>
                     <p>{canvas.size.width}</p>
                     <p>{canvas.size.height}</p>
-                    <button>Edit</button>
+                    <button><Link to={`../canvas/${canvas._id}`}>Edit</Link></button>
                     <button>Delete</button>
                 </div>
             )

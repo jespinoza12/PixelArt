@@ -53,7 +53,6 @@ export function getC2CPattern(characters,width,height) {
         output[row] = output[row].substring(beginIndex-4, beginIndex) + replaceRepeats(output[row].substring(beginIndex, length-4)) + output[row].substring(length-4);
         output[row] += " (" + (length-4-beginIndex) + ")\n";
     }
-    console.log(output)
     return output;
 }
 
@@ -68,7 +67,6 @@ const rotateMatrix = (arr,amount) => {
     for (let i = 0; i < amount; i++) {
         newArr = newArr[0].map((val, index) => newArr.map(row => row[index]).reverse())
     }
-    console.log("rotated",newArr)
     return newArr
 }
 
@@ -112,6 +110,5 @@ const replaceRepeats = (s,stitchType,stitchTypePlural) => {
     }
     if (blocksUsed < s.length)
         output += `1 ${stitchType} of {${s.charAt(s.length-1)}}`;
-    console.log(s,output)
     return output;
 }
