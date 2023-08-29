@@ -88,9 +88,16 @@ export default function Editor() {
     initializeDrawingPanel()
   }
 
+  const changeName = (evt) => {
+
+  }
+
   return (
     <div id="main"><div id="editor">
-    <h1>{name}</h1>
+    {hideOptions && (<>
+      <h1>{name}</h1>
+        <label htmlFor="name">Name</label><input id="name" type="text" value={name} onChange={(evt) => setName(evt.target.value)}/>
+    </>)}
     {hideDrawingPanel && <h2>Enter Panel Dimensions</h2>}
     {hideDrawingPanel && (
       <div id="options">
@@ -124,6 +131,7 @@ export default function Editor() {
     </button>
     
     {!hideOptions && (
+
       <>
         <input onChange={(evt) => setFile(evt.target.files[0])} accept=".pxl" type="file" style={{ "display": "none" }} ref={fileInput} />
         <button className="button" onClick={selectFile}>Import pattern</button>

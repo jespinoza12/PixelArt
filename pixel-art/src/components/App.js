@@ -39,7 +39,7 @@ function App() {
       path: "/canvas",
       element:<Editor user={user} />,
     },{
-      path: "pattern",
+      path: "/pattern",
       element: <PatternReader user={user} />
     },{
       path: "/",
