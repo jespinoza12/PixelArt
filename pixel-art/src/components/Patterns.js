@@ -18,11 +18,20 @@ function Patterns({user}) {
         setPatterns(response.data)
     }
 
+    const deletePattern = async (id) => {
+        let url = `http://localhost:6969/p/${id}`
+        const response = await axios.delete(url)
+        if (response.data) {
+            getPatterns()
+        }
+    }
+
     return (
         patterns?.map(pattern => {
             return (
                 <div>
                     <h1><Link to={`../pattern/${pattern._id}`}>{pattern.name}</Link></h1>
+                    <button onClick={() => deletePattern(pattern._id)}>Delete</button>
                 </div>
             )
         }
