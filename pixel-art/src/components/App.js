@@ -6,6 +6,8 @@ import {
 } from "react-router-dom";
 import PatternReader from "./PatternReader";
 import Nav from "./Layout/Nav"
+import Login from "./Login";
+import Register from "./Register";
 
 function App() {
 
@@ -19,6 +21,13 @@ function App() {
     },{
       path: "/",
       element: <p>Home</p>
+    },{
+      path:"/login",
+      element: <Login />
+    },
+    {
+      path:"/register",
+      element: <Register />
     }
   ]);
 

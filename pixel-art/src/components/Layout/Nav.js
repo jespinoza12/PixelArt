@@ -19,7 +19,7 @@ function Nav({user}) {
         <nav>
             <a href='/canvas'>Draw</a>
             <a href='/pattern'>Pattern</a>
-            <a href='/'>Login</a>
+            <a href='/login'>Login</a>
         </nav>
     )
 }
