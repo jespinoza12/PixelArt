@@ -31,7 +31,7 @@ function App() {
   }
 
   useEffect(() => {
-
+    console.log(user)
   },[user])
 
   const router = createBrowserRouter([
@@ -56,7 +56,7 @@ function App() {
 
   return (
     <div className="App">
-      <Nav user={user}></Nav>
+      <Nav user={user} setUser={setUser}></Nav>
       <RouterProvider router={router} />
     </div>
   );

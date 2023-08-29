@@ -1,14 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./Nav.scss"
+import axios from 'axios'
 
-function Nav({user}) {
+function Nav({user,setUser}) {
 
-    if (user?.id) {
+    const handleLogout = async () => {
+        setUser({})
+        const result = await axios.get("http://localhost:6969/u/logout")
+        console.log("Logout",result.data)
+    }
+
+    if (user?._id) {
         return (
             <nav>
                 <a>My Patterns</a>
                 <a>My Canvases</a>
-                <a>Log out</a>
+                <a onClick={handleLogout} href='/'>Log out</a>
             </nav>
         )
     }
