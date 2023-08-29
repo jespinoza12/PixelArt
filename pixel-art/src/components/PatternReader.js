@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import "./Reader.scss"
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
 function PatternReader() {
+
+    const {id} = useParams()
 
     const [pattern,setPattern] = useState([])
     const [currentLine,setCurrentLine] = useState(0)
@@ -17,7 +21,7 @@ function PatternReader() {
         reader.onload = function() {
             let patternText = reader.result;
             patternText = patternText.replaceAll("\r","").replaceAll("{","").replaceAll("}","")
-            setPattern(patternText.split("\n").slice(1).map(line => (line.split(","))))
+            setPattern(patternText.split("\n").slice(1).filter(line => line.length).map(line => (line.split(","))))
         };
 
         //logging the error if there is one
@@ -25,6 +29,23 @@ function PatternReader() {
             console.log(reader.error);
         };
     }
+
+    const getPattern = async (id) => {
+        const results = await axios.get(`http://localhost:6969/p/${id}`)
+        if (results.data) {
+            console.log("resutls",results.data.pattern)
+            let patternText = results.data.pattern;
+            patternText = patternText.replaceAll("\r","").replaceAll("{","").replaceAll("}","")
+            console.log(patternText.split("\\n"))
+            setPattern(patternText.split("\\n").slice(1).map(line => (line.split(","))))
+        }
+    }
+
+    useEffect(() => {
+        console.log(id)
+        if (id) 
+            getPattern(id)
+    },[id])
 
     useEffect(() => {
         if (scrollRef?.current)
@@ -39,7 +60,7 @@ function PatternReader() {
 
     const incrementSection = () => {
         if (currentSection == pattern[currentLine].length-1) {
-            if (currentLine < pattern.length-2) {
+            if (currentLine < pattern.length-1) {
                 setCurrentLine(currentLine+1)
                 setCurrentSection(0)
             }
@@ -74,7 +95,6 @@ function PatternReader() {
     }
 
     const handleKeyPress = useCallback((evt) => {
-        console.log(evt.key)
         if (evt.key == "ArrowRight") {
             evt.preventDefault()
             if (pattern[currentLine])

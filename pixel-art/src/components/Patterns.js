@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Patterns({user}) {
 
@@ -22,9 +22,7 @@ function Patterns({user}) {
         patterns?.map(pattern => {
             return (
                 <div>
-                    <h1>{pattern.name}</h1>
-                    <button>Edit</button>
-                    <button>Delete</button>
+                    <h1><Link to={`../pattern/${pattern._id}`}>{pattern.name}</Link></h1>
                 </div>
             )
         }
