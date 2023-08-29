@@ -9,6 +9,14 @@ html,
   width: 100%;
 }
 
+a {
+  color: $tertiary-accent;
+}
+
+a:hover {
+  color: $primary-accent;
+}
+
 body {
   background: $background;
   color: $text;

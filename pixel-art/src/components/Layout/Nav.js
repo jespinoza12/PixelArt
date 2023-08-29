@@ -3,14 +3,12 @@ import "./Nav.scss"
 
 function Nav({user}) {
 
-    if (user) {
+    if (user?.id) {
         return (
             <nav>
-                <button>Save Canvas</button>
-                <button>Save Pattern</button>
-                <button>My Patterns</button>
-                <button>My Canvases</button>
-                <button>Log out</button>
+                <a>My Patterns</a>
+                <a>My Canvases</a>
+                <a>Log out</a>
             </nav>
         )
     }
@@ -19,7 +17,7 @@ function Nav({user}) {
         <nav>
             <a href='/canvas'>Draw</a>
             <a href='/pattern'>Pattern</a>
-            <a href='/'>Login</a>
+            <a href='/login'>Login</a>
         </nav>
     )
 }
