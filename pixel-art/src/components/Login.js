@@ -18,12 +18,16 @@ function Login({setUser}) {
         evt.preventDefault()
         const body = {email,password}
         console.log(body)
-        const response = await axios.post("http://localhost:6969/u/login",body)
-        console.log(response)
-        if (response.data.success) {
-            console.log(response.data.user)
-            setUser(response.data.user)
-            navigate("/")
+        try {
+            const response = await axios.post("http://localhost:6969/u/login",body)
+            console.log(response)
+            if (response.data.success) {
+                console.log(response.data.user)
+                setUser(response.data.user)
+                navigate("/")
+            }
+        } catch (err) {
+            setMessage(err.response.data.error)
         }
         //if success, redirect to login
         //if err, show err message

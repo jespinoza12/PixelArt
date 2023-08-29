@@ -27,9 +27,10 @@ export default function Editor() {
 
   const [file,setFile] = useState()
   const [canvas,setCanvas] = useState(createArray(panelWidth,panelHeight))
-  const [pixelData,setPixelData] = useState({pallet: "rainbow",size: {panelWidth,panelHeight},pixels: []})
   
   const [name,setName] = useState("Untitled")
+  
+  const [pixelData,setPixelData] = useState({pallet: "rainbow",size: {panelWidth,panelHeight},pixels: [],name})
 
   const fileInput = useRef();
   const selectFile = () => {
@@ -52,6 +53,11 @@ export default function Editor() {
       };
     }
   },[file])
+
+  useEffect(() => {
+    setPixelData({...pixelData,pixels:canvas})
+    console.log(pixelData)
+  },[canvas])
 
   function initializeDrawingPanel() {
     setHideOptions(!hideOptions);
@@ -86,10 +92,6 @@ export default function Editor() {
     }
     setCanvas(pixels)
     initializeDrawingPanel()
-  }
-
-  const changeName = (evt) => {
-
   }
 
   return (

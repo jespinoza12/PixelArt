@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import "./Nav.scss"
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 function Nav({user,setUser}) {
 
@@ -10,11 +11,17 @@ function Nav({user,setUser}) {
         console.log("Logout",result.data)
     }
 
+    useEffect(() => {
+        console.log(user) 
+    },[user])
+
     if (user?._id) {
         return (
             <nav>
-                <a>My Patterns</a>
-                <a>My Canvases</a>
+                <Link to="../allPatterns">My Patterns</Link>
+                <a href='/allCanvases'>My Canvases</a>
+                <a href='/canvas'>Draw</a>
+                <a href='/pattern'>Pattern</a>
                 <a onClick={handleLogout} href='/'>Log out</a>
             </nav>
         )

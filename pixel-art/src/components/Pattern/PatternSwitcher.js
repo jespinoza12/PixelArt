@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import {getC2CPattern,getScPattern} from "../../Modules/PatternMaker"
 import {colors,colorNames} from "../../Modules/Colors"
 
-function PatternSwitcher({canvas,setPixelData,width,height,pixelData}) {
+function PatternSwitcher({canvas,width,height}) {
 
     const [patternType,setPatternType] = useState("c2c")
 
@@ -14,16 +14,7 @@ function PatternSwitcher({canvas,setPixelData,width,height,pixelData}) {
             createPattern(patternType)
     },[canvas,patternType])
 
-    const getPixelString = () => {
-        let output = ""
-        for (let r = 0; r < canvas.length; r++) {
-            output += canvas[r].join("")
-        }
-        return output
-    }
-
     const createPattern = (type) => {
-    setPixelData({...pixelData,pixels:getPixelString()})
     let pattern = []
     if (type == "c2c")
         pattern = getC2CPattern(canvas,width,height)

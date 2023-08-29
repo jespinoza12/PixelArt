@@ -27,6 +27,7 @@ function App() {
     console.log(response)
     if (response.data) {
       console.log(response.data)
+      setUser(response.data.user)
     }
   }
 
@@ -37,27 +38,26 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/canvas",
-      element:<Editor user={user} />,
+      element:<><Nav user={user} setUser={setUser}></Nav><Editor/></>
     },{
       path: "/pattern",
-      element: <PatternReader user={user} />
+      element:<><Nav user={user} setUser={setUser}></Nav><PatternReader user={user} /></>
     },{
       path: "/",
-      element: <p>Home</p>
+      element: <><Nav user={user} setUser={setUser}></Nav><p>Home</p></>
     },{
       path:"/login",
-      element: <Login setUser={setUser} user={user} />
+      element:<><Nav user={user} setUser={setUser}></Nav><Login setUser={setUser} /></>
     },
     {
       path:"/register",
-      element: <Register user={user} />
+      element:<><Nav user={user} setUser={setUser}></Nav><Register /></>
     }
   ]);
 
   return (
     <div className="App">
-      <Nav user={user} setUser={setUser}></Nav>
-      <RouterProvider router={router} />
+      <RouterProvider router={router} ></RouterProvider>
     </div>
   );
 }
