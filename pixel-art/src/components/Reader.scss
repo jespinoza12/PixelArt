@@ -12,4 +12,5 @@
 
 .pattern-reader-line {
     cursor: pointer;
+    break-inside: avoid-column;
 }

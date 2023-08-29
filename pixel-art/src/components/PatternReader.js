@@ -107,10 +107,10 @@ function PatternReader() {
             <input type="file" id="docpicker" accept=".txt" onChange={(evt) => handleFile(evt.target.files[0])} />
             {pattern.length ? 
             <div className='pattern-holder'>
-                <button className='inline pattern-btn' onClick={decrementSection}>Back (Up)</button>
-                <button className='inline pattern-btn' onClick={incrementSection}>Next (Down)</button>
-                <button className='inline pattern-btn' onClick={decrementLine}>Previous Line (Left)</button>
-                <button className='inline pattern-btn' onClick={incrementLine}>Next Line (Right)</button>
+                <button className='inline pattern-btn' onClick={decrementSection}>Back (Left)</button>
+                <button className='inline pattern-btn' onClick={incrementSection}>Next (Right)</button>
+                <button className='inline pattern-btn' onClick={decrementLine}>Previous Line (Down)</button>
+                <button className='inline pattern-btn' onClick={incrementLine}>Next Line (Up)</button>
                 <ol className='pattern'>
                     {pattern.map((line,lineIndex) => {
                         if (line?.[0].length) {
@@ -120,10 +120,10 @@ function PatternReader() {
                         }
                     })}
                 </ol>
-                <button className='inline pattern-btn' onClick={decrementSection}>Back (Up)</button>
-                <button className='inline pattern-btn' onClick={incrementSection}>Next (Down)</button>
-                <button className='inline pattern-btn' onClick={decrementLine}>Previous Line (Left)</button>
-                <button className='inline pattern-btn' onClick={incrementLine}>Next Line (Right)</button>
+                <button className='inline pattern-btn' onClick={decrementSection}>Back (Left)</button>
+                <button className='inline pattern-btn' onClick={incrementSection}>Next (Right)</button>
+                <button className='inline pattern-btn' onClick={decrementLine}>Previous Line (Down)</button>
+                <button className='inline pattern-btn' onClick={incrementLine}>Next Line (Up)</button>
             </div>
             :
             <></>}
