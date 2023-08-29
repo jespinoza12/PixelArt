@@ -6,6 +6,8 @@ import {
 } from "react-router-dom";
 import PatternReader from "./PatternReader";
 import Nav from "./Layout/Nav"
+import Patterns from "./Patterns";
+import Canvases from "./Canvases";
 import Login from "./Login";
 import Register from "./Register";
 import { useEffect, useState } from "react";
@@ -19,30 +21,42 @@ function App() {
   const [user,setUser] = useState({})
 
   useEffect(() => {
-    getUser()
+    setUser(getUser())
   },[])
 
   const getUser = async () => {
     const response = await axios.get("http://localhost:6969/u/user/current")
-    console.log(response)
     if (response.data) {
-      console.log(response.data)
       setUser(response.data.user)
     }
   }
 
-  useEffect(() => {
-    console.log(user)
-  },[user])
-
   const router = createBrowserRouter([
     {
       path: "/canvas",
-      element:<><Nav user={user} setUser={setUser}></Nav><Editor/></>
-    },{
-      path: "/pattern",
-      element:<><Nav user={user} setUser={setUser}></Nav><PatternReader user={user} /></>
-    },{
+      element:<Editor user={user} />,
+    },
+    {
+      path: "/canvas/:id",
+      element:<Editor user={user} />,
+    },
+    {
+      path: "/allCanvasses",
+      element:<Canvases getUser={user} />,
+    },
+    {
+      path: "/allPatterns",
+      element:<Patterns user={user}/>,
+    },
+    {
+      path: "pattern",
+      element: <PatternReader user={user} />
+    },
+    {
+      path: "pattern/:id",
+      element: <PatternReader user={user} />
+    },
+    {
       path: "/",
       element: <><Nav user={user} setUser={setUser}></Nav><p>Home</p></>
     },{
