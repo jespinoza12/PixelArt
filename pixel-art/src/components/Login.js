@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-
 function Login({setUser}) {
 
     const [email,setEmail] = useState("")
@@ -24,6 +23,7 @@ function Login({setUser}) {
             console.log(response.data.user)
             setUser(response.data.user)
             navigate("/")
+            sessionStorage.setItem("id", response.data.user._id);
         }
         //if success, redirect to login
         //if err, show err message
