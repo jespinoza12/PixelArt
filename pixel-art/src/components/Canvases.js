@@ -20,6 +20,14 @@ function Canvases({user}) {
         console.log(canvases)
     }
 
+    const deleteCanvas = async (id) => {
+        let url = `http://localhost:6969/c/${id}`
+        const response = await axios.delete(url)
+        if (response.data) {
+            getCanvases()
+        }
+    }
+
     return (
         canvases?.map(canvas => {
             return (
@@ -29,7 +37,7 @@ function Canvases({user}) {
                     <p>{canvas.size.width}</p>
                     <p>{canvas.size.height}</p>
                     <button><Link to={`../canvas/${canvas._id}`}>Edit</Link></button>
-                    <button>Delete</button>
+                    <button onClick={() => deleteCanvas(canvas._id)}>Delete</button>
                 </div>
             )
         }

@@ -3,7 +3,7 @@ import "./Reader.scss"
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
-function PatternReader() {
+function PatternReader({user}) {
 
     const {id} = useParams()
 
@@ -16,12 +16,10 @@ function PatternReader() {
     const handleFile = file => {
         let reader = new FileReader();
         reader.readAsText(file);
-
-        //getting the text and sending it to the update method
         reader.onload = function() {
             let patternText = reader.result;
             patternText = patternText.replaceAll("\r","").replaceAll("{","").replaceAll("}","")
-            setPattern(patternText.split("\n").slice(1).filter(line => line.length).map(line => (line.split(","))))
+            setPattern(patternText.split("\n").filter(line => line.length).map(line => (line.split(","))))
         };
 
         //logging the error if there is one
@@ -121,6 +119,18 @@ function PatternReader() {
     };
     }, [handleKeyPress]);
 
+    const savePattern = async () => {
+        let url = `http://localhost:6969/p/create`
+        let body = {
+            name: "Custom", 
+            pattern: pattern.map(line => line.join(",")).join("\\n"),
+            format: "Custom",
+            userID: user._id
+        }
+        const response = await axios.post(url,body)
+        console.log(response)
+    }
+
     return (
         <div className='container'>
             <p>Import pattern file</p>
@@ -131,6 +141,7 @@ function PatternReader() {
                 <button className='inline pattern-btn' onClick={incrementSection}>Next (Right)</button>
                 <button className='inline pattern-btn' onClick={decrementLine}>Previous Line (Down)</button>
                 <button className='inline pattern-btn' onClick={incrementLine}>Next Line (Up)</button>
+                <button className='inline pattern-btn' onClick={() => savePattern()}>Save Pattern</button>
                 <ol className='pattern'>
                     {pattern.map((line,lineIndex) => {
                         if (line?.[0].length) {
