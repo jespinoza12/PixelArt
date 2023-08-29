@@ -34,27 +34,27 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/canvas",
-      element:<Editor user={user} />,
+      element:<><Nav user={user} setUser={setUser}></Nav><Editor user={user} /></>
     },
     {
       path: "/canvas/:id",
-      element:<Editor user={user} />,
+      element:<><Nav user={user} setUser={setUser}></Nav><Editor user={user} /></>
     },
     {
       path: "/allCanvasses",
-      element:<Canvases getUser={user} />,
+      element:<><Nav user={user} setUser={setUser}></Nav><Canvases getUser={user} /></>
     },
     {
       path: "/allPatterns",
-      element:<Patterns user={user}/>,
+      element:<><Nav user={user} setUser={setUser}></Nav><Patterns user={user}/></>
     },
     {
       path: "pattern",
-      element: <PatternReader user={user} />
+      element: <><Nav user={user} setUser={setUser}></Nav><PatternReader user={user} /></>
     },
     {
       path: "pattern/:id",
-      element: <PatternReader user={user} />
+      element: <><Nav user={user} setUser={setUser}></Nav><PatternReader user={user} /></>
     },
     {
       path: "/",
