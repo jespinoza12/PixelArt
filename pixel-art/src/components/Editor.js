@@ -25,10 +25,11 @@ export default function Editor() {
   const [buttonText, setButtonText] = useState("start drawing");
   const [selectedColor, setColor] = useState("#000000");
 
-  const [importedPattern,setImportedPattern] = useState(null)
   const [file,setFile] = useState()
-  const [canvas,setCanvas] = useState(importedPattern ? importedPattern : createArray(panelWidth,panelHeight))
+  const [canvas,setCanvas] = useState(createArray(panelWidth,panelHeight))
   const [pixelData,setPixelData] = useState({pallet: "rainbow",size: {panelWidth,panelHeight},pixels: []})
+  
+  const [name,setName] = useState("Untitled")
 
   const fileInput = useRef();
   const selectFile = () => {
@@ -83,13 +84,13 @@ export default function Editor() {
     for (let row = 0; row < data.size.height; row++) {
         pixels = [...pixels,[...data.pixels.substring(width*row,width*row+width)]]
     }
-    setImportedPattern(pixels)
+    setCanvas(pixels)
     initializeDrawingPanel()
   }
 
   return (
     <div id="main"><div id="editor">
-    <h1>Pixel Editor</h1>
+    <h1>{name}</h1>
     {hideDrawingPanel && <h2>Enter Panel Dimensions</h2>}
     {hideDrawingPanel && (
       <div id="options">
@@ -139,7 +140,6 @@ export default function Editor() {
           width={panelWidth}
           height={panelHeight}
           selectedColor={selectedColor}
-          importedPattern={importedPattern}
           canvas={canvas}
           setCanvas={setCanvas}
           pixelData={pixelData}

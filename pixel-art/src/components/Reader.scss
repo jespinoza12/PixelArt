@@ -14,3 +14,7 @@
     cursor: pointer;
     break-inside: avoid-column;
 }
+
+strong {
+    color: $tertiary-accent;
+}
